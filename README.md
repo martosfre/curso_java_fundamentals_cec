@@ -1,2 +1,2 @@
-# curso_java_fundamentals_cec
-Repositorio del curso dictado en el CEC-EPN sobre el Módulo Nro I de Java Fundamentals.
+# Java Fundamentals
+Repositorio donde se encontraron los proyectos elaborados durante el Curso de Java Fundamentals dictado en el CEC-EPN
