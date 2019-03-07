@@ -16,6 +16,7 @@ public enum ConstanteEnumTest {
 	private String nombre;
 	private String valor;
 	
+	//El constructor es necesario cuando se tiene valores
 	private ConstanteEnumTest(String nombre, String valor) {
 		this.nombre = nombre;
 		this.valor = valor;
