@@ -39,9 +39,31 @@ public class TipoProductoTrs implements ICrud {
 
 	@Override
 	public String eliminar(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		int posEnc = 0;
+		boolean banEnc = false;
+		for (TipoProducto tipPro : MemoriaBdd.tipoProductos) {
+			if (tipPro != null && tipPro.getIdTipPro() == id) {
+				// Recuperarme la posición donde le encontre
+				banEnc = true;
+				break;
+			}
+			posEnc++;
+		}
+
+		if (banEnc) {
+			//Almacenando en un temporal la variable del contador final
+			TipoProducto tipPrTmp = MemoriaBdd.tipoProductos[MemoriaBdd.contadorTipPro -1];
+			//Registro encontrado le coloco el tmp
+			MemoriaBdd.tipoProductos[posEnc] = tipPrTmp;
+			//Al valor del contador almanenado le elimino
+			MemoriaBdd.tipoProductos[MemoriaBdd.contadorTipPro - 1] = null;
+			MemoriaBdd.contadorTipPro-=2;
+			return "Registro eliminado correctamente";
+		}else {
+			return "No se encontró registro";
+		}
 	}
+	
 
 	@Override
 	public Object[] listar() {
