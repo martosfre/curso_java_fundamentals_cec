@@ -83,9 +83,4 @@ public class Cliente extends Persona {
 		return super.getApellidoPer().toUpperCase();
 	}
 	
-	
-	
-	
-	
-
 }

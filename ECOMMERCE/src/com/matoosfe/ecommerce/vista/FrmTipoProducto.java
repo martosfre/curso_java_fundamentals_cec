@@ -42,7 +42,8 @@ public class FrmTipoProducto {
 			// Sentencias de Decisión - switch
 			switch (opcion) { // Entero o Cadena
 			case 1:
-				for (Object tipPro : adminTipPro.listar()) {
+				Object[] listaTipoProductos = adminTipPro.listar();
+				for (Object tipPro : listaTipoProductos) {
 					System.out.println(tipPro);
 				}
 				break;

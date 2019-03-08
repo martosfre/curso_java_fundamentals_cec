@@ -18,8 +18,13 @@ public class TipoProductoTrs implements ICrud {
 	@Override
 	public String guardar(Object registro) {
 		if (registro != null) {
-			MemoriaBdd.tipoProductos[0] =  (TipoProducto) registro;
-			return "Tipo Producto guardado correctamente";
+			if (MemoriaBdd.contadorTipPro <= 4) {
+				MemoriaBdd.tipoProductos[MemoriaBdd.contadorTipPro] = (TipoProducto) registro;
+				MemoriaBdd.contadorTipPro++;
+				return "Tipo Producto guardado correctamente";
+			} else {
+				return "El tamaño máximo permitido es de 5 tipos de productos para la versión demo";
+			}
 		} else {
 			return "Debe llenar todos los datos!!!";
 		}

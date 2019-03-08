@@ -3,6 +3,12 @@
  */
 package com.matoosfe.ecommerce.util;
 
+import java.math.BigDecimal;
+
+import com.matoosfe.ecommerce.modelo.Cliente;
+import com.matoosfe.ecommerce.modelo.MedioPago;
+import com.matoosfe.ecommerce.modelo.Persona;
+
 /**
  * Clase para ejemplificar como realizar el Casting
  * Casting - Realizar una conversión de un tipo a otro.
@@ -45,10 +51,21 @@ public class CastingTest {
 	 * Tipo Primitivos: byte, short, int, long, float, double, char, boolean
 	 */
 	public void testearCastingImplicito() {
+		System.out.println("Casting implicito primitivos");
 		int numeroA = 6;
 		double numeroB = numeroA;
 		short numeroShortA = 2;
 		float numeroFloatA = numeroShortA;
+		
+		System.out.println("Casting implícito objetos - herencia");
+		Cliente cliente = new Cliente("Marcelo", "Barrera", "1615789542", null,
+				"Ambato", "0225457896", "mbarrera@gmail.com", new BigDecimal(1000),
+				new MedioPago());
+		System.out.println(cliente);
+		System.out.println(cliente.getCuotaVenCli());
+		Persona persona = cliente;
+		System.out.println(persona);
+		System.out.println(persona.getCorreoPer());
 	}
 	
 	/**
@@ -59,7 +76,21 @@ public class CastingTest {
 	public void testerCastingExplicito() {
 		double numeroB = 5.3555555555555555d;
 		double numeroC = 6.8;
+		float numeroFloD = 6.3f;
 		int numeroA = (int) numeroB;
 		System.out.println(numeroA);
+		
+		System.out.println("Casting explícito objetos");
+		Persona persona = new Persona("Marcelo", "Barrera", "1615789542", null,
+				"Ambato", "0225457896", "mbarrera@gmail.com");
+		Cliente cliente = (Cliente) persona; //Error
+		System.out.println(cliente.getCuotaVenCli());
+	}
+	
+	
+	public static void main(String[] args) {
+		CastingTest ct = new CastingTest();
+		ct.testearCastingImplicito();
+		ct.testerCastingExplicito();
 	}
 }

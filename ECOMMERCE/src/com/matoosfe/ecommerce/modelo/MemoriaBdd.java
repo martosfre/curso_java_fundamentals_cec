@@ -28,6 +28,7 @@ public class MemoriaBdd {
 	private static Producto[] productos;
 	public static Usuario[] usuarios;
 	public static TipoProducto[] tipoProductos;
+	public static int contadorTipPro = 0;
 	
 //	public MemoriaBdd() {
 //		usuarios = new Usuario[3];
