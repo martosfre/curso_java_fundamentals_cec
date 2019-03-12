@@ -17,10 +17,16 @@ public class TipoProductoTrs implements ICrud {
 
 	@Override
 	public String guardar(Object registro) {
+		boolean banIng = false;
 		if (registro != null) {
-			if (MemoriaBdd.contadorTipPro <= 4) {
-				MemoriaBdd.tipoProductos[MemoriaBdd.contadorTipPro] = (TipoProducto) registro;
-				MemoriaBdd.contadorTipPro++;
+			for(int i=0; i < MemoriaBdd.tipoProductos.length; i++) {
+				if(MemoriaBdd.tipoProductos[i] == null) {
+					MemoriaBdd.tipoProductos[i]=(TipoProducto) registro;
+					banIng = true;
+					break;
+				}
+			}
+			if (banIng) {
 				return "Tipo Producto guardado correctamente";
 			} else {
 				return "El tamaño máximo permitido es de 5 tipos de productos para la versión demo";
@@ -51,13 +57,7 @@ public class TipoProductoTrs implements ICrud {
 		}
 
 		if (banEnc) {
-			//Almacenando en un temporal la variable del contador final
-			TipoProducto tipPrTmp = MemoriaBdd.tipoProductos[MemoriaBdd.contadorTipPro -1];
-			//Registro encontrado le coloco el tmp
-			MemoriaBdd.tipoProductos[posEnc] = tipPrTmp;
-			//Al valor del contador almanenado le elimino
-			MemoriaBdd.tipoProductos[MemoriaBdd.contadorTipPro - 1] = null;
-			MemoriaBdd.contadorTipPro-=2;
+			MemoriaBdd.tipoProductos[posEnc] = null;
 			return "Registro eliminado correctamente";
 		}else {
 			return "No se encontró registro";
