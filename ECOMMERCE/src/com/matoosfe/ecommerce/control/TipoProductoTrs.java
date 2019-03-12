@@ -39,8 +39,27 @@ public class TipoProductoTrs implements ICrud {
 
 	@Override
 	public String actualizar(int id, Object registro) {
-		// TODO Auto-generated method stub
-		return null;
+		/*****************************************************
+		 * BLOQUE PARA BUSCAR
+		 *******************************************************/
+		int posEnc = 0;
+		boolean banEnc = false;
+		for (TipoProducto tipPro : MemoriaBdd.tipoProductos) {
+			if (tipPro != null && tipPro.getIdTipPro() == id) {
+				// Recuperarme la posición donde le encontre
+				banEnc = true;
+				break;
+			}
+			posEnc++;
+		}
+		/************************************************************/
+		
+		if (banEnc) {
+			MemoriaBdd.tipoProductos[posEnc] = (TipoProducto) registro;
+			return "Registro actualizado correctamente";
+		}else {
+			return "No se encontró registro";
+		}
 	}
 
 	@Override

@@ -30,6 +30,10 @@ public class FrmTipoProducto {
 		TipoProductoTrs adminTipPro = new TipoProductoTrs();
 		Object[] listaTipoProductos = null;
 		String mensaje = null;
+		TipoProducto tipoProducto = null;
+		String nombre = null;
+		String descripcion = null;
+		
 		do {
 			System.out.println("\n\n*************************************");
 			System.out.println("* E-COMMERCE V 1.0 -> TIPO PRODUCTO *");
@@ -55,12 +59,12 @@ public class FrmTipoProducto {
 				System.out.print("Id:");
 				int id = Integer.parseInt(UtilLectura.leerDesdeTeclado());
 				System.out.print("Nombre:");
-				String nombre = UtilLectura.leerDesdeTeclado();
+				nombre = UtilLectura.leerDesdeTeclado();
 				System.out.println("Descripción:");
-				String descripcion = UtilLectura.leerDesdeTeclado();
+				descripcion = UtilLectura.leerDesdeTeclado();
 
 				// 2.Crear un registro (objeto de TipoProducto)
-				TipoProducto tipoProducto = new TipoProducto();
+				tipoProducto = new TipoProducto();
 				tipoProducto.setIdTipPro(id);
 				tipoProducto.setNombreTipPro(nombre);
 				tipoProducto.setDescripcionTipPro(descripcion);
@@ -73,6 +77,28 @@ public class FrmTipoProducto {
 
 				break;
 			case 3:
+				// 1. A que registro le van a actualizar
+				System.out.print("Cuál registro se debe eliminar, colocar id:");
+				int idTipProAct = Integer.parseInt(UtilLectura.leerDesdeTeclado());
+				
+				// 2.Recuperando los valores menos su id
+				System.out.println("Ingresar los datos:");
+				System.out.print("Nombre:");
+				nombre = UtilLectura.leerDesdeTeclado();
+				System.out.println("Descripción:");
+				descripcion = UtilLectura.leerDesdeTeclado();
+				
+				// 3.Crear un registro para actualizar (objeto de TipoProducto)
+				tipoProducto = new TipoProducto();
+				tipoProducto.setIdTipPro(idTipProAct);//No cambia es el id
+				tipoProducto.setNombreTipPro(nombre);
+				tipoProducto.setDescripcionTipPro(descripcion);
+
+				// 4. Llamar al controlador (el tiene las operaciones)
+				mensaje = adminTipPro.actualizar(idTipProAct, tipoProducto);
+
+				// 5. Procesar la información
+				System.out.println(mensaje);
 				break;
 			case 4:
 				//1.Mostramos todo lo que tenemos
