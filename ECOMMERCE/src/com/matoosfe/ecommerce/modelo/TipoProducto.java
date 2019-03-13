@@ -3,6 +3,8 @@
  */
 package com.matoosfe.ecommerce.modelo;
 
+import java.util.List;
+
 /**
  * Clase que representa la tabla tipo de producto
  * 
@@ -14,6 +16,8 @@ public class TipoProducto {
 	private int idTipPro;
 	private String nombreTipPro;
 	private String descripcionTipPro;
+	// Relación de Muchos
+	private List<Producto> productos;
 
 	public TipoProducto() {
 		// TODO Auto-generated constructor stub
@@ -61,7 +65,23 @@ public class TipoProducto {
 		this.descripcionTipPro = descripcionTipPro;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * @return the productos
+	 */
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	/**
+	 * @param productos the productos to set
+	 */
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -69,7 +89,5 @@ public class TipoProducto {
 		return "TipoProducto [idTipPro=" + idTipPro + ", nombreTipPro=" + nombreTipPro + ", descripcionTipPro="
 				+ descripcionTipPro + "]";
 	}
-	
-	
 
 }
