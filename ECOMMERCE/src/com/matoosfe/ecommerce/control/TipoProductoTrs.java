@@ -19,9 +19,9 @@ public class TipoProductoTrs implements ICrud {
 	public String guardar(Object registro) {
 		boolean banIng = false;
 		if (registro != null) {
-			for(int i=0; i < MemoriaBdd.tipoProductos.length; i++) {
-				if(MemoriaBdd.tipoProductos[i] == null) {
-					MemoriaBdd.tipoProductos[i]=(TipoProducto) registro;
+			for (int i = 0; i < MemoriaBdd.tipoProductos.length; i++) {
+				if (MemoriaBdd.tipoProductos[i] == null) {
+					MemoriaBdd.tipoProductos[i] = (TipoProducto) registro;
 					banIng = true;
 					break;
 				}
@@ -53,11 +53,11 @@ public class TipoProductoTrs implements ICrud {
 			posEnc++;
 		}
 		/************************************************************/
-		
+
 		if (banEnc) {
 			MemoriaBdd.tipoProductos[posEnc] = (TipoProducto) registro;
 			return "Registro actualizado correctamente";
-		}else {
+		} else {
 			return "No se encontró registro";
 		}
 	}
@@ -78,11 +78,10 @@ public class TipoProductoTrs implements ICrud {
 		if (banEnc) {
 			MemoriaBdd.tipoProductos[posEnc] = null;
 			return "Registro eliminado correctamente";
-		}else {
+		} else {
 			return "No se encontró registro";
 		}
 	}
-	
 
 	@Override
 	public Object[] listar() {
@@ -91,8 +90,30 @@ public class TipoProductoTrs implements ICrud {
 
 	@Override
 	public Object consultarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		TipoProducto tipProEnc = null;
+		for (int i = 0; i < MemoriaBdd.tipoProductos.length; i++) {
+			if (MemoriaBdd.tipoProductos[i].getIdTipPro() == id) {
+				tipProEnc = MemoriaBdd.tipoProductos[i];
+				break;
+			}
+		}
+		return tipProEnc;
+	}
+
+	/**
+	 * Método para imprimir los tipos de productos
+	 * 
+	 * @return
+	 */
+	public String imprimirListaFormateada() {
+		StringBuilder tipoProLis = new StringBuilder();
+		for (TipoProducto tipProTmp : MemoriaBdd.tipoProductos) {
+			if (tipProTmp != null) {
+				tipoProLis.append(tipProTmp.getIdTipPro()).append("-").append(tipProTmp.getNombreTipPro())
+						.append(" !! ");
+			}
+		}
+		return tipoProLis.toString();
 	}
 
 }

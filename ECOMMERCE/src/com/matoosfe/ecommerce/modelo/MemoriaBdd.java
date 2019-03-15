@@ -3,7 +3,6 @@
  */
 package com.matoosfe.ecommerce.modelo;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,8 +28,13 @@ public class MemoriaBdd {
 	private static Cliente[] clientes;
 	public static Usuario[] usuarios;
 	
+	/************************************************/
+	//1. Se utilizó un arreglo
 	public static TipoProducto[] tipoProductos;
+	// 2. Se utilizó una colección de tipo Lista
 	public static ArrayList<Producto> productos;
+	/*************************************************/
+	
 	public static int contadorTipPro = 0;
 	
 //	public MemoriaBdd() {
@@ -43,8 +47,10 @@ public class MemoriaBdd {
 	 */
 	static {
 		usuarios = new Usuario[4];
+		/**************************************************/
 		tipoProductos = new TipoProducto[5];
 		productos = new ArrayList<Producto>();
+		/**************************************************/
 		inicializar(); //Solo se acepta métodos static
 	}
 

@@ -16,9 +16,16 @@ public class ProductoTrs implements ICrudC {
 	@Override
 	public String guardar(Object registro) {
 		if (registro != null) {
-			// TODO Verificar el duplicado
-			MemoriaBdd.productos.add((Producto) registro);
-			return "Registro guardado correctamente";
+			/*
+			 * Para evitar duplicados se implementa los método hashCode/equals en la clase
+			 * (tabla)
+			 */
+			boolean banIng = MemoriaBdd.productos.add((Producto) registro);
+			if (banIng) {
+				return "Registro guardado correctamente";
+			} else {
+				return "Registro duplicado";
+			}
 		} else {
 			return "Debe llenar todos los datos";
 		}
@@ -36,7 +43,7 @@ public class ProductoTrs implements ICrudC {
 			 * Si es que le encontró el valor es mayor o igual a 0 caso contrario es -1
 			 */
 			if (pos >= 0) {
-				//Actualiza la lista en una posición; es decir se reemplaza
+				// Actualiza la lista en una posición; es decir se reemplaza
 				MemoriaBdd.productos.set(pos, (Producto) registro);
 				return "Registro actualizado correctamente";
 			} else {
@@ -49,7 +56,7 @@ public class ProductoTrs implements ICrudC {
 
 	@Override
 	public String eliminar(Object registro) {
-		
+
 		if (registro != null) {
 			/*
 			 * Encontrar la posición basada en el objeto, no interesa el id xq viene
@@ -60,7 +67,7 @@ public class ProductoTrs implements ICrudC {
 			 * Si es que le encontró el valor es mayor o igual a 0 caso contrario es -1
 			 */
 			if (pos >= 0) {
-				//Actualiza la lista en una posición; es decir se reemplaza
+				// Actualiza la lista en una posición; es decir se reemplaza
 				MemoriaBdd.productos.remove(pos);
 				return "Registro eliminado correctamente";
 			} else {
@@ -74,6 +81,21 @@ public class ProductoTrs implements ICrudC {
 	@Override
 	public List<?> consultarTodos() {
 		return MemoriaBdd.productos;
+	}
+
+	/**
+	 * Método para consultar por id
+	 * @param idProEli
+	 * @return
+	 */
+	public Producto consultarPorId(int idProEli) {
+		Producto proEnc = null;
+		for (Producto proTmp : MemoriaBdd.productos) {
+			if(proTmp.getIdPro() == idProEli) {
+				proEnc = proTmp;
+			}
+		}
+		return proEnc;
 	}
 
 }

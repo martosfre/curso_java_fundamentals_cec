@@ -16,7 +16,7 @@ public class TipoProducto {
 	private int idTipPro;
 	private String nombreTipPro;
 	private String descripcionTipPro;
-	// Relación de Muchos
+	// Relación de Muchos - N
 	private List<Producto> productos;
 
 	public TipoProducto() {

@@ -9,6 +9,7 @@ import com.matoosfe.ecommerce.control.ProductoTrs;
 import com.matoosfe.ecommerce.control.TipoProductoTrs;
 import com.matoosfe.ecommerce.control.util.UtilLectura;
 import com.matoosfe.ecommerce.modelo.Producto;
+import com.matoosfe.ecommerce.modelo.TipoProducto;
 
 /**
  * Clase que representa
@@ -64,9 +65,18 @@ public class FrmProducto {
 				descripcion = UtilLectura.leerDesdeTeclado();
 				System.out.println("Precio:");
 				precio = new BigDecimal(UtilLectura.leerDesdeTeclado());
-
+				/******************************************************
+				 * Bloque para relacionar el objeto
+				 ********************************************************/
+				System.out.print("Tipos de productos:");
+				System.out.println(adminTiPro.imprimirListaFormateada());
+				System.out.print("Ingreso el tipo de producto:");
+				int idTipPro = Integer.parseInt(UtilLectura.leerDesdeTeclado());
+				TipoProducto tipoProducto = (TipoProducto) adminTiPro.consultarPorId(idTipPro);
+				/*******************************************************************************/
+				
 				// 2.Crear un registro (objeto de TipoProducto)
-				producto = new Producto(id,nombre,descripcion, precio, null);
+				producto = new Producto(id,nombre,descripcion, precio, tipoProducto);
 
 				// 3. Llamar al controlador (el tiene las operaciones)
 				mensaje = adminPro.guardar(producto);
@@ -106,10 +116,11 @@ public class FrmProducto {
 				}
 				// 2.Recuperamos el identificador del tipo de producto a eliminar
 				System.out.print("Ingrese el id:");
-				int idTipProEli = Integer.parseInt(UtilLectura.leerDesdeTeclado());
+				int idProEli = Integer.parseInt(UtilLectura.leerDesdeTeclado());
+				Producto proEli = adminPro.consultarPorId(idProEli);
 
 				// 3.Llamar al controlar para eliminar
-				mensaje = adminPro.eliminar(idTipProEli);
+				mensaje = adminPro.eliminar(proEli);
 				System.out.println(mensaje);
 				break;
 			case 5:

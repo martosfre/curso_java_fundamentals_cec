@@ -146,7 +146,7 @@ public class Producto {
 	@Override
 	public String toString() {
 		return "Producto [idPro=" + idPro + ", nombrePro=" + nombrePro + ", descripcionPro=" + descripcionPro
-				+ ", precioPro=" + precioPro + "]";
+				+ ", precioPro=" + precioPro + getTipoProducto().getNombreTipPro() + "]" ;
 	}
 
 }
