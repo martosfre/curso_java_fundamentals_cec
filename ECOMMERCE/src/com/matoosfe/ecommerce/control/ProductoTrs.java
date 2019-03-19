@@ -17,14 +17,14 @@ public class ProductoTrs implements ICrudC {
 	public String guardar(Object registro) {
 		if (registro != null) {
 			/*
-			 * Para evitar duplicados se implementa los método hashCode/equals en la clase
-			 * (tabla)
+			 * Verificar la posición del registro
 			 */
-			boolean banIng = MemoriaBdd.productos.add((Producto) registro);
-			if (banIng) {
-				return "Registro guardado correctamente";
-			} else {
+			int pos = MemoriaBdd.productos.indexOf(registro);
+			if(pos >= 0) {
 				return "Registro duplicado";
+			}else {
+				MemoriaBdd.productos.add((Producto) registro);
+				return "Registro guardado correctamente";
 			}
 		} else {
 			return "Debe llenar todos los datos";

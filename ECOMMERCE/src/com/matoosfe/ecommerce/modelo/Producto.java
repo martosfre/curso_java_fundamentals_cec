@@ -104,21 +104,24 @@ public class Producto {
 	public void setTipoProducto(TipoProducto tipoProducto) {
 		this.tipoProducto = tipoProducto;
 	}
-	
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + idPro;
 		result = prime * result + ((nombrePro == null) ? 0 : nombrePro.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -130,6 +133,8 @@ public class Producto {
 		if (getClass() != obj.getClass())
 			return false;
 		Producto other = (Producto) obj;
+		if (idPro != other.idPro)
+			return false;
 		if (nombrePro == null) {
 			if (other.nombrePro != null)
 				return false;
@@ -146,7 +151,7 @@ public class Producto {
 	@Override
 	public String toString() {
 		return "Producto [idPro=" + idPro + ", nombrePro=" + nombrePro + ", descripcionPro=" + descripcionPro
-				+ ", precioPro=" + precioPro + getTipoProducto().getNombreTipPro() + "]" ;
+				+ ", precioPro=" + precioPro + getTipoProducto().getNombreTipPro() + "]";
 	}
 
 }
