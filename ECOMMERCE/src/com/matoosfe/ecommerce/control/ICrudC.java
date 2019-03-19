@@ -17,20 +17,20 @@ public interface ICrudC {
 	 * @param registro
 	 * @return
 	 */
-	public String guardar(Object registro);
+	public String guardar(Object registro) throws Exception;
 	/**
 	 * Definición de método para actualizar
 	 * @param registro
 	 * @return
 	 */
-	public String actualizar(Object registro);
+	public String actualizar(Object registro) throws Exception;
 	
 	/**
 	 * Definición de método para eliminar
 	 * @param registro
 	 * @return
 	 */
-	public String eliminar(Object registro);
+	public String eliminar(Object registro) throws Exception;
 	/**
 	 * Definición de método para consultar
 	 * @return
@@ -38,5 +38,5 @@ public interface ICrudC {
 	/*
 	 * Con el wildcard ? se devuelve cualquier lista de objetos de algún tipo
 	 */
-	public List<?> consultarTodos();
+	public List<?> consultarTodos() throws Exception;
 }

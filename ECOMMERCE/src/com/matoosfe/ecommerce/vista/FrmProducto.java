@@ -50,8 +50,22 @@ public class FrmProducto {
 			opcion = Integer.parseInt(UtilLectura.leerDesdeTeclado());
 			switch (opcion) { 
 			case 1:
-				for (Object tipPro : adminPro.consultarTodos()) {
-					System.out.println(tipPro);
+				try {
+					/*
+					 * En el bloque try va todo el bloque de código que puede
+					 * ocasionar error, solo existe un solo bloque try
+					 */
+					for (Object tipPro : adminPro.consultarTodos()) {
+						System.out.println(tipPro);
+					}
+				} catch (Exception e) {
+					/*
+					 * Se puede tener más de un bloque catch y sirve para
+					 * controlar el error.
+					 */
+					//Solo ocuparse en desarrollo, imprime la pila de error
+					//e.printStackTrace();
+					System.err.println(e.getMessage());
 				}
 				break;
 			case 2:
@@ -79,7 +93,12 @@ public class FrmProducto {
 				producto = new Producto(id,nombre,descripcion, precio, tipoProducto);
 
 				// 3. Llamar al controlador (el tiene las operaciones)
-				mensaje = adminPro.guardar(producto);
+				try {
+					mensaje = adminPro.guardar(producto);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// 4. Procesar la información
 				System.out.println(mensaje);
@@ -103,7 +122,12 @@ public class FrmProducto {
 				producto = new Producto(idPro,nombre,descripcion, precio, null);
 
 				// 4. Llamar al controlador (el tiene las operaciones)
-				mensaje = adminPro.actualizar(producto);
+				try {
+					mensaje = adminPro.actualizar(producto);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// 5. Procesar la información
 				System.out.println(mensaje);
@@ -111,16 +135,25 @@ public class FrmProducto {
 			case 4:
 				// 1.Mostramos todo lo que tenemos
 				System.out.println("¿Cúal registro se requiere eliminar?");
-				for (Object pro : adminPro.consultarTodos()) {
-					System.out.println(pro);
+				try {
+					for (Object pro : adminPro.consultarTodos()) {
+						System.out.println(pro);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				// 2.Recuperamos el identificador del tipo de producto a eliminar
 				System.out.print("Ingrese el id:");
 				int idProEli = Integer.parseInt(UtilLectura.leerDesdeTeclado());
-				Producto proEli = adminPro.consultarPorId(idProEli);
+				try {
+					Producto proEli = adminPro.consultarPorId(idProEli);
 
-				// 3.Llamar al controlar para eliminar
-				mensaje = adminPro.eliminar(proEli);
+					// 3.Llamar al controlar para eliminar
+					mensaje = adminPro.eliminar(proEli);
+				} catch (Exception e) {
+					System.err.println("Eror al consultor código:" + e.getMessage());
+				}
 				System.out.println(mensaje);
 				break;
 			case 5:

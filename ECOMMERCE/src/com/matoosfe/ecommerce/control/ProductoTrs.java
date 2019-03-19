@@ -3,6 +3,7 @@
  */
 package com.matoosfe.ecommerce.control;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.matoosfe.ecommerce.modelo.MemoriaBdd;
@@ -14,15 +15,15 @@ import com.matoosfe.ecommerce.modelo.Producto;
 public class ProductoTrs implements ICrudC {
 
 	@Override
-	public String guardar(Object registro) {
+	public String guardar(Object registro) throws Exception {
 		if (registro != null) {
 			/*
 			 * Verificar la posición del registro
 			 */
 			int pos = MemoriaBdd.productos.indexOf(registro);
-			if(pos >= 0) {
+			if (pos >= 0) {
 				return "Registro duplicado";
-			}else {
+			} else {
 				MemoriaBdd.productos.add((Producto) registro);
 				return "Registro guardado correctamente";
 			}
@@ -32,7 +33,7 @@ public class ProductoTrs implements ICrudC {
 	}
 
 	@Override
-	public String actualizar(Object registro) {
+	public String actualizar(Object registro) throws Exception {
 		if (registro != null) {
 			/*
 			 * Encontrar la posición basada en el objeto, no interesa el id xq viene
@@ -55,7 +56,7 @@ public class ProductoTrs implements ICrudC {
 	}
 
 	@Override
-	public String eliminar(Object registro) {
+	public String eliminar(Object registro) throws Exception {
 
 		if (registro != null) {
 			/*
@@ -79,19 +80,25 @@ public class ProductoTrs implements ICrudC {
 	}
 
 	@Override
-	public List<?> consultarTodos() {
+	public List<?> consultarTodos() throws Exception {
 		return MemoriaBdd.productos;
 	}
 
 	/**
 	 * Método para consultar por id
+	 * 
 	 * @param idProEli
 	 * @return
 	 */
-	public Producto consultarPorId(int idProEli) {
+	public Producto consultarPorId(int idProEli) throws Exception {
 		Producto proEnc = null;
+		//Error provocado en base a una condición
+		if(idProEli == 0) {
+			//Negocio o vista
+			throw new Exception("Código incorrecto!!");
+		}
 		for (Producto proTmp : MemoriaBdd.productos) {
-			if(proTmp.getIdPro() == idProEli) {
+			if (proTmp.getIdPro() == idProEli) {
 				proEnc = proTmp;
 			}
 		}
