@@ -48,60 +48,66 @@ public class FrmProducto {
 			System.out.println("5. Regresar");
 			System.out.print("... Seleccione una opción:");
 			opcion = Integer.parseInt(UtilLectura.leerDesdeTeclado());
-			switch (opcion) { 
+			switch (opcion) {
 			case 1:
 				try {
 					/*
-					 * En el bloque try va todo el bloque de código que puede
-					 * ocasionar error, solo existe un solo bloque try
+					 * En el bloque try va todo el bloque de código que puede ocasionar error, solo
+					 * existe un solo bloque try
 					 */
 					for (Object tipPro : adminPro.consultarTodos()) {
 						System.out.println(tipPro);
 					}
 				} catch (Exception e) {
 					/*
-					 * Se puede tener más de un bloque catch y sirve para
-					 * controlar el error.
+					 * Se puede tener más de un bloque catch y sirve para controlar el error.
 					 */
-					//Solo ocuparse en desarrollo, imprime la pila de error
-					//e.printStackTrace();
+					// Solo ocuparse en desarrollo, imprime la pila de error
+					// e.printStackTrace();
 					System.err.println(e.getMessage());
 				}
 				break;
 			case 2:
 				// 1.Recuperando los valores
 				System.out.println("Ingresar los datos:");
-				System.out.print("Id:");
-				int id = Integer.parseInt(UtilLectura.leerDesdeTeclado());
-				System.out.print("Nombre:");
-				nombre = UtilLectura.leerDesdeTeclado();
-				System.out.println("Descripción:");
-				descripcion = UtilLectura.leerDesdeTeclado();
-				System.out.println("Precio:");
-				precio = new BigDecimal(UtilLectura.leerDesdeTeclado());
-				/******************************************************
-				 * Bloque para relacionar el objeto
-				 ********************************************************/
-				System.out.print("Tipos de productos:");
-				System.out.println(adminTiPro.imprimirListaFormateada());
-				System.out.print("Ingreso el tipo de producto:");
-				int idTipPro = Integer.parseInt(UtilLectura.leerDesdeTeclado());
-				TipoProducto tipoProducto = (TipoProducto) adminTiPro.consultarPorId(idTipPro);
-				/*******************************************************************************/
-				
-				// 2.Crear un registro (objeto de TipoProducto)
-				producto = new Producto(id,nombre,descripcion, precio, tipoProducto);
-
-				// 3. Llamar al controlador (el tiene las operaciones)
+				int id = 0;
+				TipoProducto tipoProducto = null;
 				try {
-					mensaje = adminPro.guardar(producto);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.print("Id:");
+					id = Integer.parseInt(UtilLectura.leerDesdeTeclado());
+					System.out.print("Nombre:");
+					nombre = UtilLectura.leerDesdeTeclado();
+					System.out.println("Descripción:");
+					descripcion = UtilLectura.leerDesdeTeclado();
+					System.out.println("Precio:");
+					precio = new BigDecimal(UtilLectura.leerDesdeTeclado());
+					/******************************************************
+					 * Bloque para relacionar el objeto
+					 ********************************************************/
+					System.out.print("Tipos de productos:");
+					System.out.println(adminTiPro.imprimirListaFormateada());
+					System.out.print("Ingreso el tipo de producto:");
+					int idTipPro = Integer.parseInt(UtilLectura.leerDesdeTeclado());
+					tipoProducto = (TipoProducto) adminTiPro.consultarPorId(idTipPro);
+					/*******************************************************************************/
+					// 2.Crear un registro (objeto de TipoProducto)
+					producto = new Producto(id, nombre, descripcion, precio, tipoProducto);
+					
+					// 3. Llamar al controlador (el tiene las operaciones)
+					try {
+						mensaje = adminPro.guardar(producto);
+						// 4. Procesar la información
+						System.out.println(mensaje);
+					} catch (Exception e) {
+						System.err.println("Error al guardar:" + e.getMessage());
+					}
+				} catch (NumberFormatException e1) {
+					System.err.println("Datos númericos incorrectos!!!");
+				} catch (Exception e1) {
+					System.err.println(e1.getMessage());
 				}
 
-				// 4. Procesar la información
-				System.out.println(mensaje);
+
 
 				break;
 			case 3:
@@ -119,7 +125,7 @@ public class FrmProducto {
 				precio = new BigDecimal(UtilLectura.leerDesdeTeclado());
 
 				// 3.Crear un registro para actualizar (objeto de TipoProducto)
-				producto = new Producto(idPro,nombre,descripcion, precio, null);
+				producto = new Producto(idPro, nombre, descripcion, precio, null);
 
 				// 4. Llamar al controlador (el tiene las operaciones)
 				try {
@@ -142,6 +148,11 @@ public class FrmProducto {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} finally {
+					/*
+					 * Existe o no existe error siempre se ejecuta, se puede utilizar para
+					 * auditoria, logs, cierre de conexiones envio de alertas
+					 */
 				}
 				// 2.Recuperamos el identificador del tipo de producto a eliminar
 				System.out.print("Ingrese el id:");

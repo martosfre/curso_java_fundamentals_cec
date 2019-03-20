@@ -19,5 +19,5 @@ public interface ICrud {
 	
 	public Object[] listar();
 	
-	public Object consultarPorId(int id);
+	public Object consultarPorId(int id) throws Exception;
 }

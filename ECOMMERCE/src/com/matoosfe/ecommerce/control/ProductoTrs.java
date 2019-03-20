@@ -3,7 +3,6 @@
  */
 package com.matoosfe.ecommerce.control;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.matoosfe.ecommerce.modelo.MemoriaBdd;
@@ -92,15 +91,19 @@ public class ProductoTrs implements ICrudC {
 	 */
 	public Producto consultarPorId(int idProEli) throws Exception {
 		Producto proEnc = null;
-		//Error provocado en base a una condición
-		if(idProEli == 0) {
-			//Negocio o vista
+		// Error provocado en base a una condición
+		if (idProEli == 0) {
+			// Negocio o vista
 			throw new Exception("Código incorrecto!!");
 		}
-		for (Producto proTmp : MemoriaBdd.productos) {
-			if (proTmp.getIdPro() == idProEli) {
-				proEnc = proTmp;
+		try {
+			for (Producto proTmp : MemoriaBdd.productos) {
+				if (proTmp.getIdPro() == idProEli) {
+					proEnc = proTmp;
+				}
 			}
+		} catch (Exception e) {
+			throw new Exception("No se puede consultar revisar la inicialización de la tabla productos");
 		}
 		return proEnc;
 	}

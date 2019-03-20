@@ -89,13 +89,17 @@ public class TipoProductoTrs implements ICrud {
 	}
 
 	@Override
-	public Object consultarPorId(int id) {
+	public Object consultarPorId(int id) throws Exception {
 		TipoProducto tipProEnc = null;
-		for (int i = 0; i < MemoriaBdd.tipoProductos.length; i++) {
-			if (MemoriaBdd.tipoProductos[i].getIdTipPro() == id) {
-				tipProEnc = MemoriaBdd.tipoProductos[i];
-				break;
+		try {
+			for (int i = 0; i < MemoriaBdd.tipoProductos.length; i++) {
+				if (MemoriaBdd.tipoProductos[i].getIdTipPro() == id) {
+					tipProEnc = MemoriaBdd.tipoProductos[i];
+					break;
+				}
 			}
+		} catch (Exception e) {
+			throw new Exception("Tipo de producto no existe");
 		}
 		return tipProEnc;
 	}
